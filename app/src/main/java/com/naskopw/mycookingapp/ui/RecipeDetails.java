@@ -147,6 +147,8 @@ public class RecipeDetails extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             TextView content = findViewById(R.id.textView);
             TextView titleTextView  = findViewById(R.id.titleTextView);
+            TextView timerTextView = findViewById(R.id.sideTimerTextView);
+            timerTextView.setText(recipe.getCookingTime().toString());
             titleTextView.setText(recipe.getRecipeName());
             ImageView detailsImage = findViewById(R.id.detailsImageView);
             StringBuilder ingredients = new StringBuilder();
