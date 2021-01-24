@@ -17,7 +17,6 @@ import com.naskopw.mycookingapp.R;
 import com.naskopw.mycookingapp.adapters.RecipeOverviewAdapter;
 import com.naskopw.mycookingapp.dao.HttpHandler;
 import com.naskopw.mycookingapp.models.Recipe;
-import com.naskopw.mycookingapp.services.FavoriteService;
 import com.naskopw.mycookingapp.settings.GlobalSettings;
 import com.naskopw.mycookingapp.util.RecipeCategoryMapping;
 
