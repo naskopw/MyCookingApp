@@ -67,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createFavoritesDB() {
-
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        database.close();
-        dbHelper.close();
-        Toast.makeText(this,"DB created",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -98,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    class FetchRecipes extends AsyncTask<Void, Void, Void> {
+    private class FetchRecipes extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {

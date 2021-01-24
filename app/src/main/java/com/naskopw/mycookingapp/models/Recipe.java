@@ -1,10 +1,26 @@
 package com.naskopw.mycookingapp.models;
 
+import java.util.Objects;
+
 public class Recipe {
     private int id;
     private String category;
     private String image;
     private String[] ingredients;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return id == recipe.id &&
+                category.equals(recipe.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, category);
+    }
 
     public int getId() {
         return id;

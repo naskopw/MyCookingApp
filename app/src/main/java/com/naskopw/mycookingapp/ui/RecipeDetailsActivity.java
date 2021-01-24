@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -63,6 +64,10 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         recipeCategory = extras.getString("category_name");
         recipeId = extras.getInt("id");
+        if (recipeCategory.isEmpty() || recipeCategory == null) {
+            Toast.makeText(this, getResources().getString(R.string.errorOccurred), Toast.LENGTH_LONG).show();
+            Log.e(RecipeDetailsActivity.class.getSimpleName(), String.format("Invalid recipe passed to details activity, category: %s, id: %d", recipeCategory, recipeId));
+        }
         TabLayout detailsTabLayout = findViewById(R.id.detailsTabLayout);
         detailsTabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         detailsTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -127,12 +132,22 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     public void onFavoriteClick(View view) {
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.RECIPE_CATEGORY, recipeCategory);
-        values.put(DatabaseHelper.RECIPE_ID, recipeId);
-        database.insert(DatabaseHelper.TABLE_NAME, null, values);
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_NAME;
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToNext()) {
+            String deleteQuery = String.format("DELETE FROM %s WHERE %s='%s' AND %s=%d", DatabaseHelper.TABLE_NAME, DatabaseHelper.RECIPE_CATEGORY, recipeCategory, DatabaseHelper.RECIPE_ID, recipeId);
+            database.execSQL(deleteQuery);
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.removedFromFavorites), Toast.LENGTH_LONG).show();
+        } else {
+            values.put(DatabaseHelper.RECIPE_CATEGORY, recipeCategory);
+            values.put(DatabaseHelper.RECIPE_ID, recipeId);
+            database.insert(DatabaseHelper.TABLE_NAME, null, values);
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.addedToFavorites), Toast.LENGTH_LONG).show();
+        }
         database.close();
         dbHelper.close();
     }

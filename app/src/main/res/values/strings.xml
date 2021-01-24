@@ -32,4 +32,7 @@
     <string name="tabImageDesc">TabImage</string>
     <string name="shareRecipeContent">"Recipe link: Missing"</string>
     <string name="goToFavoriteRecipesButton">Go to favorite recipes</string>
+    <string name="addedToFavorites">Successfuly added to favorites</string>
+    <string name="removedFromFavorites">Removed from farovorites</string>
+    <string name="errorOccurred">Something is wrong, check logcat for errors</string>
 </resources>
