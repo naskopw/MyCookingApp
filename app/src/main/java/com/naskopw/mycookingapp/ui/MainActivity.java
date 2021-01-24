@@ -3,6 +3,7 @@ package com.naskopw.mycookingapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.naskopw.mycookingapp.R;
 import com.naskopw.mycookingapp.adapters.RecipeOverviewAdapter;
+import com.naskopw.mycookingapp.dao.DatabaseHelper;
 import com.naskopw.mycookingapp.dao.HttpHandler;
 import com.naskopw.mycookingapp.models.Recipe;
 import com.naskopw.mycookingapp.settings.GlobalSettings;
@@ -64,15 +66,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void createFavoritesDB() {
+
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        database.close();
+        dbHelper.close();
+        Toast.makeText(this,"DB created",Toast.LENGTH_LONG).show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         recipes = new ArrayList<>();
         setContentView(R.layout.activity_main);
+        createFavoritesDB();
+
         final ListView recipeList = findViewById(R.id.recipeList);
         recipeList.setOnItemClickListener((parent, view, position, id) -> {
             if (recipes.size() > 0) {
-                Intent intent = new Intent(MainActivity.this, RecipeDetails.class);
+                Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);
                 Recipe clickedRecipe = recipes.get(position);
                 intent.putExtra("category_name", clickedRecipe.getCategory());
                 intent.putExtra("id", clickedRecipe.getId());

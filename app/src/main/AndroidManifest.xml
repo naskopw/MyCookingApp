@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCookingApp">
-        <activity android:name=".ui.RecipeDetails" />
+        <activity android:name=".ui.FavoritesActivity"></activity>
+        <activity
+            android:name=".ui.RecipeDetailsActivity"
+            android:theme="@style/Theme.MyCookingApp.NoActionBar" />
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_splash_screen"
@@ -22,8 +26,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    android:screenOrientation="portrait"/>
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:screenOrientation="portrait" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

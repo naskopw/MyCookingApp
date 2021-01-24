@@ -13,4 +13,5 @@
     <dimen name="recipeImagesHeight">260dp</dimen>
     <dimen name="recipeImagesWidth">0dp</dimen>
     <dimen name="listItemImageHeight">240dp</dimen>
+    <dimen name="ToolbarSize">4dp</dimen>
 </resources>

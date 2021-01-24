@@ -1,12 +1,18 @@
 package com.naskopw.mycookingapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -19,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.naskopw.mycookingapp.R;
 import com.naskopw.mycookingapp.adapters.RecipeOverviewAdapter;
+import com.naskopw.mycookingapp.dao.DatabaseHelper;
 import com.naskopw.mycookingapp.dao.HttpHandler;
 import com.naskopw.mycookingapp.models.Recipe;
 import com.naskopw.mycookingapp.settings.GlobalSettings;
@@ -30,7 +37,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RecipeDetails extends AppCompatActivity {
+public class RecipeDetailsActivity extends AppCompatActivity {
     private Recipe recipe;
     private String recipeCategory;
     private Integer recipeId;
@@ -42,6 +49,9 @@ public class RecipeDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
 
         sideMenuItems = new FloatingActionButton[]{
                 findViewById(R.id.shareButton),
@@ -76,6 +86,28 @@ public class RecipeDetails extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.app_bar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_favorite:
+                Intent intent = new Intent(getApplicationContext(), FavoritesActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+
     public void showOrHideSideMenu(View view) {
         if (isSideMenuVisible)
             for (FloatingActionButton b : sideMenuItems)
@@ -95,6 +127,14 @@ public class RecipeDetails extends AppCompatActivity {
     }
 
     public void onFavoriteClick(View view) {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.RECIPE_CATEGORY, recipeCategory);
+        values.put(DatabaseHelper.RECIPE_ID, recipeId);
+        database.insert(DatabaseHelper.TABLE_NAME, null, values);
+        database.close();
+        dbHelper.close();
     }
 
     public void onTimerClick(View view) {
