@@ -71,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final ListView recipeList = findViewById(R.id.recipeList);
         recipeList.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(MainActivity.this, RecipeDetails.class);
-            Recipe clickedRecipe = recipes.get(position);
-            intent.putExtra("category_name", clickedRecipe.getCategory());
-            intent.putExtra("id", clickedRecipe.getId());
-            startActivity(intent);
+            if (recipes.size() > 0) {
+                Intent intent = new Intent(MainActivity.this, RecipeDetails.class);
+                Recipe clickedRecipe = recipes.get(position);
+                intent.putExtra("category_name", clickedRecipe.getCategory());
+                intent.putExtra("id", clickedRecipe.getId());
+                startActivity(intent);
+            }
+
         });
         new FetchRecipes().execute();
         switchTabImage();
