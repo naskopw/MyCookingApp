@@ -9,10 +9,10 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="tab_bulgarian">Bulgarian</string>
-    <string name="tab_american">American</string>
-    <string name="tab_asian">Asian</string>
-    <string name="tab_vegan">Vegan</string>
+    <string name="tabBulgarian">Bulgarian</string>
+    <string name="tabAmerican">American</string>
+    <string name="tabAsian">Asian</string>
+    <string name="tabVegan">Vegan</string>
     <string name="empty_recipe_tab_text">No recipes found in this category.</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -23,4 +23,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="recipeimageDesc">RecipeImage</string>
+    <string name="ingredientsTabText">Ingredients</string>
+    <string name="stepsTabText">Steps</string>
+    <string name="favoritesButtonDesc">Add to favorites</string>
+    <string name="shareButtonDesc">Share the recipe with your friends</string>
+    <string name="showMenuButtonDesc">Show or hide the side menu</string>
+    <string name="tabImageDesc">TabImage</string>
 </resources>

@@ -9,11 +9,10 @@
     <ImageView
         android:id="@+id/recipeThumbnail"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_row="0"
-        android:layout_column="0"
+        android:layout_height="@dimen/listItemImageHeight"
         android:scaleType="fitXY"
-        android:src="@drawable/bulgarian" />
+        android:src="@drawable/bulgarian"
+        android:contentDescription="@string/recipeimageDesc" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,12 +27,11 @@
 
         <TextView
             android:id="@+id/recipeTime"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:drawableRight="@drawable/timer_icon"
-            android:textAlignment="textEnd"
-            android:text="30" />
+            android:drawableEnd="@drawable/timer_icon"
+            android:textAlignment="textEnd"/>
 
     </LinearLayout>
 </LinearLayout>

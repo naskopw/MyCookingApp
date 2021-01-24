@@ -6,10 +6,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.naskopw.mycookingapp.R;
@@ -30,7 +33,7 @@ public class RecipeDetails extends AppCompatActivity {
     private String recipeCategory;
     private Integer recipeId;
     private int selectedTab;
-    boolean isSideMenuVisible = true;
+    boolean isSideMenuVisible = false;
     private FloatingActionButton[] sideMenuItems;
 
     @Override
@@ -51,7 +54,7 @@ public class RecipeDetails extends AppCompatActivity {
         TabLayout detailsTabLayout = findViewById(R.id.detailsTabLayout);
         detailsTabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
         detailsTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
+        new FetchRecipes().execute();
         detailsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -101,6 +104,12 @@ public class RecipeDetails extends AppCompatActivity {
                         r.setRecipeName(c.getString("recipe_name"));
                         r.setCategory(c.getString("category"));
                         r.setCookingTime(c.getInt("cooking_time"));
+                        JSONArray ingredients = c.getJSONArray("ingredients");
+                        r.setIngredients(new String[ingredients.length()]);
+                        for (int j=0;j<ingredients.length();j++)
+                        {
+                            r.getIngredients()[j] = ingredients.get(j).toString();
+                        }
                         r.setSteps(c.getString("steps"));
                         r.setId(i);
                         r.setImage(c.getString("image"));
@@ -137,9 +146,20 @@ public class RecipeDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             TextView content = findViewById(R.id.textView);
+            TextView titleTextView  = findViewById(R.id.titleTextView);
+            titleTextView.setText(recipe.getRecipeName());
+            ImageView detailsImage = findViewById(R.id.detailsImageView);
+            StringBuilder ingredients = new StringBuilder();
+            for(String ingredient : recipe.getIngredients())
+            {
+                ingredients.append("\u2022");
+                ingredients.append(ingredient+"\n");
+            }
+            Glide.with(getApplicationContext()).load(recipe.getImage()).into(detailsImage);
+
             if (selectedTab == 0)
             {
-                content.setText(recipe.getRecipeName());
+                content.setText(ingredients.toString());
             }
             if (selectedTab == 1)
             {

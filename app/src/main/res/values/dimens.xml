@@ -3,4 +3,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="detailsSizeMenuHeight">87dp</dimen>
+    <dimen name="detailsSizeMenuWidth">0dp</dimen>
+    <dimen name="detailsContentMarginStart">20dp</dimen>
+    <dimen name="detailsContentMarginTop">20dp</dimen>
+    <dimen name="detailsContentSize">20sp</dimen>
+    <dimen name="detailsRecipeTitleMarginStart">20dp</dimen>
+    <dimen name="detailsRecipeTitleMarginBottom">20dp</dimen>
+    <dimen name="recipeImagesHeight">260dp</dimen>
+    <dimen name="recipeImagesWidth">0dp</dimen>
+    <dimen name="listItemImageHeight">240dp</dimen>
 </resources>

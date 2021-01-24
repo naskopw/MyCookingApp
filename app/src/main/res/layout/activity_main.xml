@@ -10,43 +10,44 @@
 
     <ImageView
         android:id="@+id/mainImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="260dp"
+        android:layout_width="@dimen/recipeImagesWidth"
+        android:layout_height="@dimen/recipeImagesHeight"
         android:scaleType="fitXY"
         android:src="@drawable/bulgarian"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/tabImageDesc" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/mainTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/mainImageView"
-        tools:layout_editor_absoluteX="-16dp">
+        >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/bulgarianTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_bulgarian" />
+            android:text="@string/tabBulgarian" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/AmericanTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_american" />
+            android:text="@string/tabAmerican" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/AsianTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_asian" />
+            android:text="@string/tabAsian" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/VeganTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tab_vegan" />
+            android:text="@string/tabVegan" />
     </com.google.android.material.tabs.TabLayout>
 
     <LinearLayout
