@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         });
         new FetchRecipes().execute();
         switchTabImage();
-        startService(new Intent(this, FavoriteService.class));
     }
 
 
