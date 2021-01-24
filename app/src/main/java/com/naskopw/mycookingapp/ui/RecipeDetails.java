@@ -1,7 +1,9 @@
 package com.naskopw.mycookingapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -84,6 +86,23 @@ public class RecipeDetails extends AppCompatActivity {
         isSideMenuVisible = !isSideMenuVisible;
     }
 
+    public void onShareClick(View view) {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "App link");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getResources().getString(R.string.shareRecipeContent));
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    public void onFavoriteClick(View view) {
+    }
+
+    public void onTimerClick(View view) {
+
+        DialogFragment newFragment = new TimePickerFragment(recipe.getRecipeName(), recipe.getCookingTime());
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
     private class FetchRecipes extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -106,8 +125,7 @@ public class RecipeDetails extends AppCompatActivity {
                         r.setCookingTime(c.getInt("cooking_time"));
                         JSONArray ingredients = c.getJSONArray("ingredients");
                         r.setIngredients(new String[ingredients.length()]);
-                        for (int j=0;j<ingredients.length();j++)
-                        {
+                        for (int j = 0; j < ingredients.length(); j++) {
                             r.getIngredients()[j] = ingredients.get(j).toString();
                         }
                         r.setSteps(c.getString("steps"));
@@ -146,25 +164,22 @@ public class RecipeDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             TextView content = findViewById(R.id.textView);
-            TextView titleTextView  = findViewById(R.id.titleTextView);
+            TextView titleTextView = findViewById(R.id.titleTextView);
             TextView timerTextView = findViewById(R.id.sideTimerTextView);
             timerTextView.setText(recipe.getCookingTime().toString());
             titleTextView.setText(recipe.getRecipeName());
             ImageView detailsImage = findViewById(R.id.detailsImageView);
             StringBuilder ingredients = new StringBuilder();
-            for(String ingredient : recipe.getIngredients())
-            {
+            for (String ingredient : recipe.getIngredients()) {
                 ingredients.append("\u2022");
-                ingredients.append(ingredient+"\n");
+                ingredients.append(ingredient + "\n");
             }
             Glide.with(getApplicationContext()).load(recipe.getImage()).into(detailsImage);
 
-            if (selectedTab == 0)
-            {
+            if (selectedTab == 0) {
                 content.setText(ingredients.toString());
             }
-            if (selectedTab == 1)
-            {
+            if (selectedTab == 1) {
                 content.setText(recipe.getSteps());
             }
         }

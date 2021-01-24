@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.naskopw.mycookingapp.R;
 import com.naskopw.mycookingapp.adapters.RecipeOverviewAdapter;
 import com.naskopw.mycookingapp.dao.HttpHandler;
 import com.naskopw.mycookingapp.models.Recipe;
+import com.naskopw.mycookingapp.services.FavoriteService;
 import com.naskopw.mycookingapp.settings.GlobalSettings;
 import com.naskopw.mycookingapp.util.RecipeCategoryMapping;
 
@@ -25,7 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -81,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
         });
         new FetchRecipes().execute();
         switchTabImage();
-
-
+        startService(new Intent(this, FavoriteService.class));
     }
 
 

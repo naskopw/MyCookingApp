@@ -30,4 +30,5 @@
     <string name="shareButtonDesc">Share the recipe with your friends</string>
     <string name="showMenuButtonDesc">Show or hide the side menu</string>
     <string name="tabImageDesc">TabImage</string>
+    <string name="shareRecipeContent">"Recipe link: Missing"</string>
 </resources>
