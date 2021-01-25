@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.RecipeDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -48,110 +53,99 @@
             android:text="@string/stepsTabText" />
     </com.google.android.material.tabs.TabLayout>
 
-    <ScrollView
-        android:id="@+id/SCROLLER_ID"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsTabLayout"
-        >
-
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
             android:layout_marginStart="@dimen/detailsContentMarginStart"
-            android:layout_marginTop="@dimen/detailsContentMarginTop"
+            android:layout_marginBottom="16dp"
             android:textSize="@dimen/detailsContentSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detailsTabLayout" />
-    </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="@dimen/detailsSizeMenuHeight"
-        android:layout_height="@dimen/detailsSizeMenuWidth"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/sideTimerTextView"
-            android:layout_width="match_parent"
-            android:drawableEnd="@drawable/timer_icon"
-            android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:layout_weight="0"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/timerButton"
-            android:visibility="invisible"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_weight="0"
-            android:onClick="onTimerClick"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:contentDescription="@string/action_sign_in"
-            android:src="@drawable/timer_icon"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_marginTop="35dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailsTabLayout">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/favoriteButton"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_weight="0"
-            android:onClick="onFavoriteClick"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:src="@drawable/bookmark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@string/favoritesButtonDesc" />
+            <TextView
+                android:id="@+id/sideTimerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:drawableEnd="@drawable/timer_icon"
+                android:textAlignment="textEnd" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/shareButton"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_weight="0"
-            android:onClick="onShareClick"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:src="@drawable/share"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@string/shareButtonDesc" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/timerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_weight="0"
+                android:contentDescription="@string/action_sign_in"
+                android:onClick="onTimerClick"
+                android:src="@drawable/timer_icon"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/showMenuButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_weight="0"
-            android:onClick="showOrHideSideMenu"
-            android:layout_marginStart="@dimen/fab_margin"
-            android:layout_marginTop="@dimen/fab_margin"
-            android:layout_marginEnd="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:src="@drawable/menu"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="@string/showMenuButtonDesc" />
-    </LinearLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/favoriteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_weight="0"
+                android:contentDescription="@string/favoritesButtonDesc"
+                android:onClick="onFavoriteClick"
+                android:src="@drawable/bookmark"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_weight="0"
+                android:contentDescription="@string/shareButtonDesc"
+                android:onClick="onShareClick"
+                android:src="@drawable/share"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/showMenuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginStart="@dimen/fab_margin"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginEnd="@dimen/fab_margin"
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:layout_weight="0"
+                android:contentDescription="@string/showMenuButtonDesc"
+                android:onClick="showOrHideSideMenu"
+                android:src="@drawable/menu"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </LinearLayout>
 
     <TextView
         android:id="@+id/titleTextView"
@@ -163,4 +157,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/detailsImageView"
         app:layout_constraintStart_toStartOf="@+id/detailsImageView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

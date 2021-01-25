@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,6 +52,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
         Toolbar myToolbar = findViewById(R.id.toolbar);
+        TextView content = findViewById(R.id.textView);
+        content.setMovementMethod(new ScrollingMovementMethod());
         setSupportActionBar(myToolbar);
 
 
@@ -135,7 +138,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        String query = "SELECT * FROM " + DatabaseHelper.TABLE_NAME;
+        String query = String.format("SELECT * FROM %s WHERE %s='%s' AND %s=%d", DatabaseHelper.TABLE_NAME, DatabaseHelper.RECIPE_CATEGORY, recipeCategory, DatabaseHelper.RECIPE_ID, recipeId);
         Cursor cursor = database.rawQuery(query, null);
 
         if (cursor.moveToNext()) {
